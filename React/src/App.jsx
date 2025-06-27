@@ -40,6 +40,10 @@ import About from './components/About';
 import Dashboard from './components/Dashboard';
 import Navbar from './components/Navbar';
 import ParamComp from './components/ParamComp'
+import Courses from './components/Courses'
+import MockTest from './components/MockTest'
+import Report from './components/Report'
+import Notfound from './components/Notfound'
 const router=createBrowserRouter(
   [  //this array contains all the routes and these routes are inside the curly braces
     {
@@ -64,7 +68,26 @@ const router=createBrowserRouter(
       <div>
         <Navbar/>
         <Dashboard/>
-      </div>
+      </div>,
+      //nested routing
+      childre:[
+        {
+          path:'courses',
+          element:<Courses/>
+        },
+        {
+          path:'mock-test',
+          element:<MockTest/>
+        },
+        {
+          path:'report',
+          element:<Report/>
+        },
+         {
+          path:'*' ,//ye random agar hum koi path par ja rhe hai to wo wale case ko handle karega
+          element:<Notfound/>
+         }
+      ]
      },
      //how parameters are passed 
      {
