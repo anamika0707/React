@@ -39,7 +39,7 @@ import Home from './components/Home';
 import About from './components/About';
 import Dashboard from './components/Dashboard';
 import Navbar from './components/Navbar';
-
+import ParamComp from './components/ParamComp'
 const router=createBrowserRouter(
   [  //this array contains all the routes and these routes are inside the curly braces
     {
@@ -64,6 +64,15 @@ const router=createBrowserRouter(
       <div>
         <Navbar/>
         <Dashboard/>
+      </div>
+     },
+     //how parameters are passed 
+     {
+      path:"./student/:id", //:id this is called route parameter and id=something this is called query parameter
+      element:
+      <div>
+        <Navbar/>
+        <ParamComp/>
       </div>
      }
   ]

@@ -2,7 +2,8 @@ import React from 'react'
 import Home from './Home'
 import Dashboar from './Dashboard'
 import About from './About'
-import {Link} from 'react-router-dom'
+import ParamComp from './ParamComp'
+import {Link,NavLink} from 'react-router-dom'
 import './Navbar.css'
 const Navbar=()=>{
     return (
