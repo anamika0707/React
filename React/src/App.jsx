@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import {createContext} from 'react'
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
 import './App.css'
+import ChildComponent from './components/ChildComponent';
 
 
 // step :1 create context
@@ -110,72 +111,99 @@ import './App.css'
 
 // export default App;
 
+//useref concept 
+// function App(){
+//   const [count,setCount]=useState(0);
+//   // let val=1;
+//   let val=useRef(0);
+//   let btnRef=useRef() //here reference is created
+//   function handleIncrement(){
+//     // val=val+1; 
+//     val.current=val.current+1;
+//     setCount(count+1);
+//   }
+//  //this will run on every render
+//   useEffect(()=>{
+//     console.log("mai phir se render ho gya")
+//   })
+//   function changeColor(){
+//     btnRef.current.style.backgroundColor="red"; //here reference is changed
+//   }
+//   return(
+//     <div>
+//       <button onClick={handleIncrement}>Increment</button>
+//       <br>
+//       </br>
+//       {/* //here reference is linked */}
+//       <button ref={btnRef} onClick={changeColor}>Change color of first button</button>
+//       <br>
+//       </br>
+//        <div>
+//         count:{count}
+//        </div>
+//     </div>
+//   )
+// }
+
+
+// //using the useRef concept to make a stop watch
+
+// function App(){
+//   const [time,setTime]=useState(0);
+//   let timerRef=useRef(null);
+//   function startTimer(){
+//     timerRef.current=setInterval(()=>{
+//       setTime(time=>time+1)
+//     },100)
+//   }
+//   function stopTimer(){
+//     clearInterval(timerRef.current);
+//     timerRef.current=null;
+//   }
+//   function resetTimer(){
+//     stopTimer();
+//     setTime(0);
+//   }
+
+//   return (
+//     <div>
+//       <h1>Stopwatch :{time}</h1>
+//       <button onClick={startTimer}>Start</button>
+//       <br></br>
+//       <button onClick={stopTimer}>Stop
+
+//       </button>
+//       <br>
+//       </br>
+
+//       <button onClick={resetTimer}>Reset</button>
+//     </div>
+//   )
+// }
+
+//useCallback concept
 
 function App(){
   const [count,setCount]=useState(0);
-  // let val=1;
-  let val=useRef(0);
-  let btnRef=useRef() //here reference is created
-  function handleIncrement(){
-    // val=val+1; 
-    val.current=val.current+1;
+  function handleClick(){
     setCount(count+1);
   }
- //this will run on every render
-  useEffect(()=>{
-    console.log("mai phir se render ho gya")
-  })
-  function changeColor(){
-    btnRef.current.style.backgroundColor="red"; //here reference is changed
-  }
-  return(
-    <div>
-      <button onClick={handleIncrement}>Increment</button>
-      <br>
-      </br>
-      {/* //here reference is linked */}
-      <button ref={btnRef} onClick={changeColor}>Change color of first button</button>
-      <br>
-      </br>
-       <div>
-        count:{count}
-       </div>
-    </div>
-  )
-}
-
-
-//using the useRef concept to make a stop watch
-
-function App(){
-  const [time,setTime]=useState(0);
-  let timerRef=useRef(null);
-  function startTimer(){
-    timerRef.current=setInterval(()=>{
-      setTime(time=>time+1)
-    },100)
-  }
-  function stopTimer(){
-    clearInterval(timerRef.current);
-    timerRef.current=null;
-  }
-  function resetTimer(){
-    stopTimer();
-    setTime(0);
-  }
+  const handleClick=useCallback(()=>{
+    setCount(count+1);
+  },[count]); //yaha handlClick function count ke reference mein hi run hoga 
 
   return (
     <div>
-      <h1>Stopwatch :{time}</h1>
-      <button onClick={startTimer}>Start</button>
-      <br></br>
-      <button onClick={stopTimer}>Stop
-
-      </button>
+      <div>
+        Count:{count}
+      </div>
       <br>
       </br>
-
-      <button onClick={resetTimer}>Reset</button>
+      <button onClick={handleClick}>Increment</button>
+      <br></br>
+     <div>
+      <ChildComponent buttonName="ClickMe" handleClick={handleClick}/>
+     </div>
     </div>
   )
 }
